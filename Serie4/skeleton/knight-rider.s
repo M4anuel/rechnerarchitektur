@@ -38,14 +38,14 @@ configurePins:
 
 	// Set the latch pin to 'output' mode
 	/* to be implemented by student */
-	LDR R0, .LATCH
+	LDR R0, .LATCH_PIN
 	LDR R1, .OUTPUT
 	BL pinMode
 
 
 	// Set the clock pin to 'output' mode
 	/* to be implemented by student */
-	LDR R0, .CLOCK_PIN
+	LDR R0, .CLOCK_PIN+
 	LDR R1, .OUTPUT
 	BL pinMode
 
@@ -90,17 +90,25 @@ knightRiderLoop:
 	2. Send the data with shiftOut
 	3. Set the latch pin to high
 	*/
-
-
+	
 	// Set latch pin low (read serial data)
 	/* to be implemented by student */
-	
+	LDR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+
 	// Send serial data (shiftOut)
 	/* to be implemented by student */
-
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .LSBFIRST
+	LDR R3, #32
+	BL shiftout
 	// Set latch pin high (write serial data to parallel output)
 	/* to be implemented by student */
-	
+	LDR R0, .LATCH_PIN
+	LDR R1, .HIGH
+	BL digitalWrite
 	
 	
 	// Detect button presses and increase/decrease the delay
@@ -112,7 +120,7 @@ knightRiderLoop:
 	/* to be implemented by student */
 
 	// Repeat
-	B KnightRiderLoop
+	//B KnightRiderLoop
 	
 
 	
