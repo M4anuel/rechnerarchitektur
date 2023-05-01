@@ -124,20 +124,6 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
-	MOV R4,#0b00000010
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
 
 	//repeat 14
 	MOV R4,#0b00000010
@@ -334,22 +320,6 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
-
-	MOV R4,#0b000000001
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-
 
 	B knightRiderLoop
 exit:
