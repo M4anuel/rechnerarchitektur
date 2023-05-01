@@ -68,10 +68,7 @@ configurePins:
 	BL	pullUpDnControl
 
 start:
-	//mov eax,0
-	//mov ebx,500
-	//mov ecx,0
-	//mov edx,7
+
 	/* 
 	Implement the main logic for the running light here and in the loop below.
 	Depending on your implementation, you will probably need to initialise
@@ -81,6 +78,11 @@ start:
 	- a register for a counter variable
 	- and/or other (temporary) registers as you wish.
 	*/
+	MOV R4,#0
+	MOV R5,#500
+	MOV R6,#0
+	MOV R8,#0
+
 
 
 knightRiderLoop:
@@ -121,6 +123,7 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
+
 
 	// Repeat
 	//B KnightRiderLoop
