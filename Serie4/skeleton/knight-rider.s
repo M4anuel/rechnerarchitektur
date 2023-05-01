@@ -119,7 +119,7 @@ knightRiderLoop:
 	/* to be implemented by student */
 	//up button
 	LDR R0, .BUTTON1_PIN
-	LDR R1, R5
+	MOV R1, R5
 	LDR R2, .PUD_DOWN
 	BL waitForButton
 	CMP R0, #1
@@ -127,9 +127,10 @@ knightRiderLoop:
 
 	//down button
 	LDR R0, .BUTTON2_PIN
-	LDR R1, R5
+	MOV R1, R5
 	LDR R2, .PUD_DOWN
 	BL waitForButton
+	CMP R0, #1
 	BEQ decrease_speed
 
 
@@ -339,11 +340,11 @@ knightRiderLoop:
 	B knightRiderLoop
 
 	increase_speed:
-		sub b5, b5, 100
+		sub R5, R5, #100
 		B knightRiderLoop
 
 	decrease_speed:
-		add b5, b5, 100
+		add R5, R5, #100
 		B knightRiderLoop
 exit:
 	MOV 	R7, #1				// System call 1, exit
