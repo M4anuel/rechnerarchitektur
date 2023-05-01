@@ -3,13 +3,13 @@
  Series 4 - Raspberry Pi Programming Part 1 - Running Light
  
  Group members:
- firstname lastname; firstname lastname; firstname lastname
+ Manuel Flückiger; Deepak Parapuckal; Nicolas Willimann
  
  Individualised code by:
- firstname lastname
+ Manuel Flückiger
  
  Exercise Version:
- ** denote the exercise version here (1, 2 or 3) **
+ 1
 
  Notes:
  We provide hints and guidance in the comments below and
@@ -38,14 +38,26 @@ configurePins:
 
 	// Set the latch pin to 'output' mode
 	/* to be implemented by student */
+	LDR R0, .LATCH
+	LDR R1, .OUTPUT
+	BL pinMode
 
 
 	// Set the clock pin to 'output' mode
 	/* to be implemented by student */
+	LDR R0, .CLOCK_PIN
+	LDR R1, .OUTPUT
+	BL pinMode
 
 	// Set the pins of BUTTON 1 and BUTTON 2 to 'input' mode 
 	/* to be implemented by student */
+	LDR R0, .BUTTON1_PIN
+	LDR R1, .INPUT
+	BL pinMode
 
+	LDR R0, .BUTTON2_PIN
+	LDR R1, .INPUT
+	BL pinMode
 
 	LDR	R0, .BUTTON1_PIN
 	LDR	R1, .PUD_UP
@@ -98,6 +110,9 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
+
+	// Repeat
+	B KnightRiderLoop
 	
 
 	
