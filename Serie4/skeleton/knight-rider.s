@@ -117,15 +117,20 @@ knightRiderLoop:
 	// Detect button presses and increase/decrease the delay
 	// Use the 'waitForButton' subroutine for each button
 	/* to be implemented by student */
+	//up button
 	LDR R0, .BUTTON1_PIN
 	LDR R1, R5
 	LDR R2, .PUD_DOWN
 	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
 	LDR R0, .BUTTON2_PIN
 	LDR R1, R5
 	LDR R2, .PUD_DOWN
 	BL waitForButton
+	BEQ decrease_speed
 
 
 	// Wait 500 milliseconds
@@ -332,6 +337,14 @@ knightRiderLoop:
 	BL 	delay
 
 	B knightRiderLoop
+
+	increase_speed:
+		sub b5, b5, 100
+		B knightRiderLoop
+
+	decrease_speed:
+		add b5, b5, 100
+		B knightRiderLoop
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
