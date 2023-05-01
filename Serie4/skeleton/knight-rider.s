@@ -81,7 +81,7 @@ start:
 	MOV R4,#0b00000001 //LED Bar (1-8)
 	MOV R5,#500 //delay
 	MOV R6,#0 //state of buttons (0-3)
-	MOV R8,#1 //counter (0-15)
+	MOV R8,#0 //counter (0-15)
 
 knightRiderLoop:
 	/* 
@@ -124,28 +124,28 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
-	CMP R8, #7
-	BGT down
-	BL up
+	CMP R8, #15
+	BGT back_to_start
+
+
+	up:
+		CMP R4, #128
+		BGT down
+		LSL R4, R4, #1
+		ADD R8, R8, #1
+		B knightRiderLoop
 	
 	down:
+		CMP R4, #1
+		BEQ up
 		LSR R4, R4, #1
-		B continue
-
-		
-	up:
-		LSL R4, R4, #1
-	continue:
 		ADD R8, R8, #1
-		MOV R0, #15
-		CMP R8, R0
-		BGT back_to_start
-		
-	// Repeat
-	B knightRiderLoop
+		B knightRiderLoop
+
 	back_to_start:
-			MOV R8,#0
-	B knightRiderLoop
+		MOV R8, #0
+		B knightRiderLoop
+
 
 exit:
 	MOV 	R7, #1				// System call 1, exit
