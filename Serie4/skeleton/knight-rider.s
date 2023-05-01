@@ -528,7 +528,7 @@ knightRiderLoop:
 
 	decrease_speed:
 		CMP R5, #100
-		BLT increase
+		BGT increase
 		B knightRiderLoop
 	increase:
 		add R5, R5, #100
