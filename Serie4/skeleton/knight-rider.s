@@ -105,7 +105,7 @@ knightRiderLoop:
 	LDR R0, .DATA_PIN
 	LDR R1, .CLOCK_PIN
 	LDR R2, .MSBFIRST //most for us is the correct one
-	LDR R3, R4 //which led should light up
+	MOV R3, R4 //which led should light up
 	BL shiftOut
 	// Set latch pin high (write serial data to parallel output)
 	/* to be implemented by student */
