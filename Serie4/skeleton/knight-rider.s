@@ -105,7 +105,7 @@ knightRiderLoop:
 	/* to be implemented by student */
 	LDR R0, .DATA_PIN
 	LDR R1, .CLOCK_PIN
-	LDR R2, .LSBFIRST
+	LDR R2, .MSBFIRST
 	LDR R3, #32
 	BL shiftout
 	// Set latch pin high (write serial data to parallel output)
