@@ -45,7 +45,7 @@ configurePins:
 
 	// Set the clock pin to 'output' mode
 	/* to be implemented by student */
-	LDR R0, .CLOCK_PIN+
+	LDR R0, .CLOCK_PIN
 	LDR R1, .OUTPUT
 	BL pinMode
 
@@ -66,7 +66,6 @@ configurePins:
 	LDR	R0, .BUTTON2_PIN
 	LDR	R1, .PUD_UP
 	BL	pullUpDnControl
-	cd ra/rechnerarchitektur/Serie4
 
 start:
 	//mov eax,0
@@ -105,12 +104,12 @@ knightRiderLoop:
 	/* to be implemented by student */
 	LDR R0, .DATA_PIN
 	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	LDR R3, #32
-	BL shiftout
+	LDR R2, .MSBFIRST //most for us is the correct one
+	LDR R3, #0b01000001 //which led should light up
+	BL shiftOut
 	// Set latch pin high (write serial data to parallel output)
 	/* to be implemented by student */
-	LDR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN 
 	LDR R1, .HIGH
 	BL digitalWrite
 	
