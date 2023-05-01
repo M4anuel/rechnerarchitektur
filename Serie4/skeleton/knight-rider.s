@@ -124,6 +124,7 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
+<<<<<<< HEAD
 	MOV R0, #0b10000000
 	CMP R4,R0
 	BET a
@@ -152,6 +153,27 @@ knightRiderLoop:
 	
 
 	
+=======
+	CMP R8, #7
+	BLT up
+	BGE down
+	ADD R8, R8, #1
+	CMP R8, #13
+	BGT reset_counter
+	B knightRiderLoop
+
+	up:
+		LSL R4, R4, #1
+		bx lr
+
+	down:
+		LSR R4, R4, #1
+		bx lr
+	reset_counter:
+		MOV R8, #0
+		bx lr
+
+>>>>>>> ffb8233f8aa6123ee2285e66ac6a704e013f300d
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
