@@ -79,12 +79,10 @@ start:
 	- a register for a counter variable
 	- and/or other (temporary) registers as you wish.
 	*/
-	MOV R4,#0
-	MOV R5,#500
-	MOV R6,#0
-	MOV R8,#0
-
-
+	MOV R4,#0 //LED Bar (0-7)
+	MOV R5,#500 //delay
+	MOV R6,#0 //state of buttons (0-3)
+	MOV R8,#0 //counter (0-15)
 
 knightRiderLoop:
 	/* 
@@ -124,10 +122,27 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
+	CMP #7,R8
+	BGT up
+	BAL down
+	up:
+		ADD R4,R4,#1
+		ADD R8,R8,#1
 
+	down:
+		SUB R4,R4,#1
+		ADD R8,R8,#1
+		CMP #15,R8
+		BGT continue
+		BAL back_to_start
+
+		back_to_start:
+			MOV R4,#0
+
+		continue:
 
 	// Repeat
-	//B KnightRiderLoop
+	B KnightRiderLoop
 	
 
 	
