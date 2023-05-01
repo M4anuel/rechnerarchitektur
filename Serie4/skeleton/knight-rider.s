@@ -117,6 +117,7 @@ knightRiderLoop:
 	// Detect button presses and increase/decrease the delay
 	// Use the 'waitForButton' subroutine for each button
 	/* to be implemented by student */
+
 	//up button
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
@@ -134,13 +135,27 @@ knightRiderLoop:
 	BEQ decrease_speed
 
 
-	// Wait 500 milliseconds
+	// Wait delay milliseconds
 	MOV	R0, R5
 	BL 	delay
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	//repeat 14
 	MOV R4,#0b00000010
 	LDR R0, .LATCH_PIN
@@ -156,7 +171,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00000100
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -171,7 +200,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00001000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -186,7 +229,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00010000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -201,7 +258,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00100000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -216,7 +287,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b01000000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -231,7 +316,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b10000000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -246,7 +345,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b01000000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -261,7 +374,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00100000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -276,7 +403,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00010000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -291,7 +432,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00001000
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -306,7 +461,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00000100
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
@@ -321,7 +490,21 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
+//up button
+	LDR R0, .BUTTON1_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ increase_speed
 
+	//down button
+	LDR R0, .BUTTON2_PIN
+	MOV R1, R5
+	LDR R2, .PUD_DOWN
+	BL waitForButton
+	CMP R0, #1
+	BEQ decrease_speed
 	MOV R4,#0b00000010
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
