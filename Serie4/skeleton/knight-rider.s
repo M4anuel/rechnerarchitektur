@@ -118,6 +118,9 @@ knightRiderLoop:
 	// Use the 'waitForButton' subroutine for each button
 	/* to be implemented by student */
 	
+	// Wait 500 milliseconds
+	MOV	R0, #500
+	BL 	delay
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
