@@ -124,14 +124,16 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
-	CMP R8, #16
-	BGT back_to_start
 	CMP R8, #7
-	BLT up
-	BGT down
-	// Repeat
+	BGE up
+	BL down
+	ADD R8, R8 , #1
+	CMP R8, #16
+	BNE knightRiderLoop
+	mov R8, #1
 	B knightRiderLoop
-		
+
+
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
@@ -155,19 +157,9 @@ foo:
 */ 
 up:
 		LSL R4, R4, #1
-		ADD R8, R8, #1
-		B knightRiderLoop
 
 down:
 		LSR R4, R4, #1
-		ADD R8, R8, #1
-		MOV R0, #15
-		CMP R8, R0
-		BGT back_to_start
-
-back_to_start:
-		MOV R8,#0	
-		B knightRiderLoop
 
 waitForButton:
 	/* 
