@@ -125,17 +125,20 @@ knightRiderLoop:
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
 	MOV R0, #7
-	CMP R0, R8
-	BGT up
-	BAL down
-	
+	CMP R8, R0
+	BGT down
+	BAL up
+	up:
+		LSL R4, R4, #1
+		ADD R8, R8, #1
+
 	down:
 		LSR R4, R4, #1
 		ADD R8, R8, #1
 		MOV R0, #15
-		CMP R0, R8
-		BGT continue
-		BAL back_to_start
+		CMP R8, R0
+		BGT back_to_start
+		BAL continue
 
 		back_to_start:
 			MOV R8,#0
