@@ -93,7 +93,7 @@ knightRiderLoop:
 	2. Send the data with shiftOut
 	3. Set the latch pin to high
 	*/
-	
+	MOV R4,#0b00000001
 	// Set latch pin low (read serial data)
 	/* to be implemented by student */
 	LDR R0, .LATCH_PIN
@@ -124,34 +124,234 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
-	MOV R0, #0b10000000
-	CMP R4,R0
-	BET a
-	MOV R0, #0b00000001
-	BET b
-	B c
-	a: 
-		MOV R8,#1
-		B c
+	MOV R4,#0b00000010
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
 
-	b:
-		MOV R8,#0
-	c:
-		MOV R0, #1
-		CMP R8, R0
-		BET down
-	up:
-		LSL R4, R4, #1
-		B knightRiderLoop
+	//repeat 14
+	MOV R4,#0b00000010
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
 
-	down:
-		LSR R4, R4, #1
+	MOV R4,#0b00000100
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
 
-	// Repeat
+	MOV R4,#0b00001000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00010000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00100000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b01000000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b10000000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b01000000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00100000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00010000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00001000
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00000100
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b00000010
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+	MOV R4,#0b000000001
+	DR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, R4 
+	BL shiftOut
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite
+	MOV	R0, R5
+	BL 	delay
+
+
 	B knightRiderLoop
-	
-
-	
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
