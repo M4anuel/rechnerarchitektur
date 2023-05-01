@@ -128,10 +128,7 @@ knightRiderLoop:
 	CMP R0, R8
 	BGT up
 	BAL down
-	up:
-		LSL R4, R4, #1
-		ADD R8, R8, #1
-
+	
 	down:
 		LSR R4, R4, #1
 		ADD R8, R8, #1
@@ -142,8 +139,11 @@ knightRiderLoop:
 
 		back_to_start:
 			MOV R8,#0
-
+	up:
+		LSL R4, R4, #1
+		ADD R8, R8, #1
 		continue:
+	
 
 	// Repeat
 	B knightRiderLoop
