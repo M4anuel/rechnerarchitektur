@@ -69,6 +69,10 @@ configurePins:
 	
 
 start:
+	mov eax,0
+	mov ebx,500
+	mov ecx,0
+	mov edx,7
 	/* 
 	Implement the main logic for the running light here and in the loop below.
 	Depending on your implementation, you will probably need to initialise
