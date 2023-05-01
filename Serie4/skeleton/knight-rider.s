@@ -66,9 +66,10 @@ configurePins:
 	LDR	R0, .BUTTON2_PIN
 	LDR	R1, .PUD_UP
 	BL	pullUpDnControl
-	
+	cd ra/rechnerarchitektur/Serie4
 
 start:
+
 	/* 
 	Implement the main logic for the running light here and in the loop below.
 	Depending on your implementation, you will probably need to initialise
@@ -106,7 +107,7 @@ knightRiderLoop:
 	/* to be implemented by student */
 	LDR R0, .DATA_PIN
 	LDR R1, .CLOCK_PIN
-	LDR R2, .LSBFIRST
+	LDR R2, .MSBFIRST
 	LDR R3, #32
 	BL shiftout
 	// Set latch pin high (write serial data to parallel output)
