@@ -125,7 +125,7 @@ knightRiderLoop:
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
 	MOV R4,#0b00000010
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -141,7 +141,7 @@ knightRiderLoop:
 
 	//repeat 14
 	MOV R4,#0b00000010
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -156,7 +156,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00000100
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -171,7 +171,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00001000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -186,7 +186,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00010000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -201,7 +201,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00100000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -216,7 +216,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b01000000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -231,7 +231,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b10000000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -246,7 +246,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b01000000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -261,7 +261,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00100000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -276,7 +276,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00010000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -291,7 +291,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00001000
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -306,7 +306,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00000100
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -321,7 +321,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b00000010
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
@@ -336,7 +336,7 @@ knightRiderLoop:
 	BL 	delay
 
 	MOV R4,#0b000000001
-	DR R0, .LATCH_PIN
+	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
 	LDR R0, .DATA_PIN
