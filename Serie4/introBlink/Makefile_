@@ -1,0 +1,4 @@
+blink1: blink.s
+	gcc -o blink blink.s -l wiringPi
+
+

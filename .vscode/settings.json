@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "mips.h": "c",
+        "compiler.h": "c"
+    }
+}

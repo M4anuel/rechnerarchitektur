@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{minted}
+
+
+\author{Manuel Flückiger 22-112-502}
+\title{Rechnerarchitektur Serie 2}
+\date{\today}
+
+\begin{document}
+
+\newcommand{\mycomment}[1]{}
+
+\maketitle
+
+\section*{Theorie Aufgaben}
+\section{Integrated Circuit}
+\begin{itemize}
+    \item Increased processing power. \newline
+    Miniaturization enables more components to be integrated into a 
+    single wafer, which increases the number of connections between 
+    the integrated circuit and printed circuit board. This increases 
+    the ability to route signals and therefore increases the processing 
+    power of the system it is being assembled into
+
+    \item Reduced power consumption. \newline
+    Miniaturization reduces the distance between components on a chip, 
+    which reduces the amount of power required to move data between them.
+\end{itemize}
+
+\section{Influence on the conductivity of semiconductors during production}
+
+The conductivity of a semiconductor can be influenced by doping during production. 
+Doping is the process of adding impurities to a pure semiconductor material to change
+its electrical properties. Very small amounts of dopants (in the parts-per-million range)
+dramatically affect the conductivity of semiconductors. The electrical conductivity
+of a material depends on the number of free electrons and holes per unit volume and 
+on the rate at which these carriers move under the influence of
+an electric field. In an intrinsic semiconductor there exists an equal number of 
+free electrons and holes. If the temperature of the semiconductor increases, the 
+concentration of charge carriers (electrons and holes) is also increased. Hence, 
+the conductivity of a semiconductor is increased accordingly. 
+
+N-doping and P-doping are two types of doping used in semiconductors.
+N-type doping is the process of adding impurities such as phosphorus or arsenic
+to a pure semiconductor material to increase the number of free electrons in the 
+material. P-type doping is the process of adding impurities such as boron or aluminum 
+to a pure semiconductor material to increase the number of holes in the material. Doped
+semiconductors are electrically neutral. The terms n- and p-type doped do only refer to 
+the majority charge carriers. Each positive or negative charge carrier belongs to a fixed
+negative or positive charged dopant. N- and p-doped semiconductors behave approximately 
+equal in relation to the current flow.
+
+\section{Changing the conductivity of a MOSFET}
+
+The conductivity of an NMOS MOSFET between drain and source changes based on the voltage
+applied to the gate terminal. The gate terminal is separated from the channel by a thin
+layer of oxide which acts as a dielectric material. When a voltage is applied to the
+gate terminal, an electric field is created across the oxide layer which induces a 
+channel between the source and drain terminals. The conductivity of this channel depends
+on the voltage applied to the gate terminal and can be used for amplifying or switching.
+
+
+\section{MOSFET characteristics}
+
+When the gate voltage of an NMOS MOSFET is above the threshold voltage, it enters 
+into saturation region where the current between drain and source becomes almost 
+constant with increasing drain-source voltage.
+
+
+\section{Performance calculations}
+\begin{itemize}
+    \item{How much faster/sloqer is a machine that needs 6 clock cycles for the LOAD instructions}\newline
+    Assuming all operations are performed around the same amount:
+    \newline
+    $ LOAD\ with\ 4\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 15\ cycles. $\newline
+    $ LOAD\ with\ 6\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 17\ cycles. $\newline
+    $ cycles_{old} = \frac{15}{15}=100\%, cycles_{new} = \frac{17}{15}=113.3\%$ \newline
+    that means on average you need 13.3\% more time to complete a programme.
+
+    \item{How much faster is a CPU when its STORE works twice as fast?}\newline
+    Assuming all operations are performed around the same amount:
+    \newline
+    $ STORE\ with\ 12\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 15\ cycles. $\newline
+    $ STORE\ with\ 6\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 12\ cycles. $\newline
+    $ cycles_{old} = \frac{15}{15}=100\%, cycles_{new} = \frac{12}{15}=80\%$ \newline
+    that means on average you need 20\% less time to complete a programme.
+\end{itemize}
+
+\section{Using a stack in subroutines}
+There are several reasons why one needs the stack for assembler subroutines. 
+One reason is that it allows for nested subroutines. Another reason is that 
+it allows for passing parameters to subroutines. The processor stack is used 
+to store the return address of the subroutine.
+
+\section{ALU & SLT}
+\begin{itemize}
+    \item The slt command in the ALU (Arithmetic Logic Unit) stands for “Set Less Than”. 
+    It is a command that compares two values and sets a register to 1 if the first value 
+    is less than the second value, and 0 otherwise.
+    \item The ALU calculates that using second
+    value minus first value and if the result is $< 0$, the msb (most significant bit) will
+    be 1 and the first value must be smaller than the second value. This will then be fed back 
+    to the ALU and will be the output.
+\end{itemize}
+
+\end{document}
