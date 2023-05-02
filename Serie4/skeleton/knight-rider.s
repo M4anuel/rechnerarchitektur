@@ -95,51 +95,52 @@ knightRiderLoop:
 	2. Send the data with shiftOut
 	3. Set the latch pin to high
 	*/
-	MOV R4,#0b00000001
-	// Set latch pin low (read serial data)
-	/* to be implemented by student */
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
+	first_step:
+		MOV R4,#0b00000001
+		// Set latch pin low (read serial data)
+		/* to be implemented by student */
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
 
-	// Send serial data (shiftOut)
-	/* to be implemented by student */
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST //most for us is the correct one
-	MOV R3, R4 //which led should light up
-	BL shiftOut
-	// Set latch pin high (write serial data to parallel output)
-	/* to be implemented by student */
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
+		// Send serial data (shiftOut)
+		/* to be implemented by student */
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST //most for us is the correct one
+		MOV R3, R4 //which led should light up
+		BL shiftOut
+		// Set latch pin high (write serial data to parallel output)
+		/* to be implemented by student */
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
 	
 	
-	// Detect button presses and increase/decrease the delay
-	// Use the 'waitForButton' subroutine for each button
-	/* to be implemented by student */
+		// Detect button presses and increase/decrease the delay
+		// Use the 'waitForButton' subroutine for each button
+		/* to be implemented by student */
 
-	//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
 
 
-	// Wait delay milliseconds
-	MOV	R0, R5
-	BL 	delay
+		// Wait delay milliseconds
+		MOV	R0, R5
+		BL 	delay
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
@@ -149,398 +150,427 @@ knightRiderLoop:
 	//used LSL and LSR where needed, but if we code it like that, there's really no point in doing it the 
 	//proper way other than to show you that we can do it, so I did it with the first example (line 168 & 371)
 	//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	//repeat 14
-	
-	LSL R4, R4, #1
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	//repeat 14 times...
+	second_step:
+		LSL R4, R4, #1
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00000100
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	third_step:
+		MOV R4,#0b00000100
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00001000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00010000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+	fourth_step:
+		MOV R4,#0b00001000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00100000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	fifth_step:
+		MOV R4,#0b00010000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b01000000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	sixth_step:
+		MOV R4,#0b00100000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b10000000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	seventh_step:
+		MOV R4,#0b01000000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	LSR R4, R4, #1
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	eight_step:
+		MOV R4,#0b10000000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00100000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	ninth_step:
+		LSR R4, R4, #1
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00010000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-	//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	tenth_step:
+		MOV R4,#0b00100000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00001000
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	eleventh_step:
+		MOV R4,#0b00010000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00000100
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
-	//up button
-	LDR R0, .BUTTON1_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ increase_speed
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	twelvth_step:
+		MOV R4,#0b00001000
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
 
-	//down button
-	LDR R0, .BUTTON2_PIN
-	MOV R1, R5
-	LDR R2, .PUD_DOWN
-	BL waitForButton
-	CMP R0, #1
-	BEQ decrease_speed
-	MOV R4,#0b00000010
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, R4 
-	BL shiftOut
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite
-	MOV	R0, R5
-	BL 	delay
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	thirteenth_step:
+		MOV R4,#0b00000100
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
+
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
+	fourteenth_step:
+		MOV R4,#0b00000010
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R4 
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+		MOV	R0, R5
+		BL 	delay
+		//up button
+		LDR R0, .BUTTON1_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ increase_speed
+
+		//down button
+		LDR R0, .BUTTON2_PIN
+		MOV R1, R5
+		LDR R2, .PUD_DOWN
+		BL waitForButton
+		CMP R0, #1
+		BEQ decrease_speed
 
 	B knightRiderLoop
 
 	increase_speed:
 		CMP R5, #100
 		BGT increase
-		B knightRiderLoop
+		BX LR
+		
 
 	decrease_speed:
 		add R5, R5, #100
-		B knightRiderLoop
+		BX LR
 	increase:
 		sub R5, R5, #100
-		B knightRiderLoop
+		BX LR
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
