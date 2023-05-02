@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{minted}
+\usepackage{graphicx}
+\usepackage{calligra}
 
 
 \author{Manuel Flückiger 22-112-502}
@@ -12,95 +14,104 @@
 
 \maketitle
 
-\section*{Theorie Aufgaben}
-\section{Integrated Circuit}
-\begin{itemize}
-    \item Increased processing power. \newline
-    Miniaturization enables more components to be integrated into a 
-    single wafer, which increases the number of connections between 
-    the integrated circuit and printed circuit board. This increases 
-    the ability to route signals and therefore increases the processing 
-    power of the system it is being assembled into
+\section*{Theoretical Questions}
+\section{Sign Extension \_/1 Point}
+Explain why the sign extension is especially needed for branch-, load- and store-instructions. \newline
+All I-format instructions, such as loads, stores, and branches, need sign extension. The bits that 
+are extended are the address field bits (the instruction’s least significant 16 bits). 
+The sign extension’s output will be an input for some kind of adder, which requires two 
+32-bit values as input. We can use a negative offset from the register value for loads and stores. 
+For example, when accessing local values from a stack pointer, negative offsets are often used. 
+Backward branches, like the ones in loops, need a negative offset from the program counter.
+\section{Logical and Bitwise Operations in C \_/1 Point}
+Determine the corresponding outputs:\newline
+\begin{tabular}{|c|c|c|}
+    \hline
+    Operation & Result & Explanation\\
+    \hline
+    0x0 \&\& 0xEF & false & \&\& returns 1 (true) if both values are non-zero, 0x0 = 0, 0xEF = 239 \\
+    \hline
+    0xD3 \& 0x5B & 0x53 & bitwise and operator: 11010011\& 01011011 = 01010011\\
+    \hline
+    0x0 \textbar\ \textbar\ 0xEF & 1 & returns 1 (true) if either values are non-zero\\
+    \hline
+    0xA3 \textbar\ 0x3A & 0xBB & bitwise or operator: 10100011 \textbar 00111010 = 10111011\\
+    \hline
+    !0xFE & false & 0xFE = 254 = true. With the logical NOT infront, this changes to 0\\
+    \hline
+    $\sim$0xFE & 0x01 &  bitwise not inverts all bits ∼11111110 \rightarrow 000000001 \rightarrow 0x01\\
+    \hline
+    \end{tabular}
 
-    \item Reduced power consumption. \newline
-    Miniaturization reduces the distance between components on a chip, 
-    which reduces the amount of power required to move data between them.
+\section{infinite Loop \_/2 points}
+The programmer intended the following MIPS program to execute foo in line 8 exactly nine times.
+However, the program does not terminate. Explain why and fix the problem while preserving the
+original intent (reordering, modifying or removing instructions is not allowed).\newline
+The reason for this is that the code does not update the return address (\$ra) register when 
+calling the foo subroutine on line 4. The \$ra register holds the address of the instruction 
+to return to after a subroutine call. In this case, the \$ra register should be set to line 5, 
+but it is not. Therefore, when the foo subroutine executes the jr \$ra instruction on line 11, 
+it jumps back to line 4 instead of line 5, and repeats the loop indefinitely.
+
+To fix this problem, you need to use the jalr instruction instead of jal on line 4. The jalr 
+instruction jumps to a subroutine and sets the \$ra register to the address of the next 
+instruction. This way, when the foo subroutine returns, it will resume from line 5 and 
+decrement the loop counter (\$t0) as intended.
+
+\section{bne instead of beq \_/2 Points}
+What changes are needed in the MIPS implementation presented in the lecture (see slide 16 “003-
+Einführung in MIPS.pdf”) to implement bne instead of beq?\newline
+\textit{weird reference.}
+\begin{itemize}
+\item[(a)] For the singlecycle implementation \newline
+\includegraphics[width=\textwidth]{mipssinglecyclemarked.png}
+The, in red marked, multiplexer should be inverted, so 1 is up and 0 is down.
+
+\item[(b)] For the multicycle implementation. \newline
+\includegraphics[width=\textwidth]{multycyclemarked.png}
+
+The, in green added, NOG must be added before the logical AND.
+
 \end{itemize}
 
-\section{Influence on the conductivity of semiconductors during production}
 
-The conductivity of a semiconductor can be influenced by doping during production. 
-Doping is the process of adding impurities to a pure semiconductor material to change
-its electrical properties. Very small amounts of dopants (in the parts-per-million range)
-dramatically affect the conductivity of semiconductors. The electrical conductivity
-of a material depends on the number of free electrons and holes per unit volume and 
-on the rate at which these carriers move under the influence of
-an electric field. In an intrinsic semiconductor there exists an equal number of 
-free electrons and holes. If the temperature of the semiconductor increases, the 
-concentration of charge carriers (electrons and holes) is also increased. Hence, 
-the conductivity of a semiconductor is increased accordingly. 
+\section{Pipeline Registers \_/1 Points}
+What are the registers (see slide 8, “005d-Der-Prozessor - Pipeline.pdf”) between the states needed
+for?
+The values need to be stored temporarily, otherwise they would be overwritten in the next step or the 
+previous step would alter the output too quickly.
 
-N-doping and P-doping are two types of doping used in semiconductors.
-N-type doping is the process of adding impurities such as phosphorus or arsenic
-to a pure semiconductor material to increase the number of free electrons in the 
-material. P-type doping is the process of adding impurities such as boron or aluminum 
-to a pure semiconductor material to increase the number of holes in the material. Doped
-semiconductors are electrically neutral. The terms n- and p-type doped do only refer to 
-the majority charge carriers. Each positive or negative charge carrier belongs to a fixed
-negative or positive charged dopant. N- and p-doped semiconductors behave approximately 
-equal in relation to the current flow.
-
-\section{Changing the conductivity of a MOSFET}
-
-The conductivity of an NMOS MOSFET between drain and source changes based on the voltage
-applied to the gate terminal. The gate terminal is separated from the channel by a thin
-layer of oxide which acts as a dielectric material. When a voltage is applied to the
-gate terminal, an electric field is created across the oxide layer which induces a 
-channel between the source and drain terminals. The conductivity of this channel depends
-on the voltage applied to the gate terminal and can be used for amplifying or switching.
-
-
-\section{MOSFET characteristics}
-
-When the gate voltage of an NMOS MOSFET is above the threshold voltage, it enters 
-into saturation region where the current between drain and source becomes almost 
-constant with increasing drain-source voltage.
-
-
-\section{Performance calculations}
+\section{Pipelining Hazard \_/2 Points}
+Explain the difference between control, data and structural hazards.
 \begin{itemize}
-    \item{How much faster/sloqer is a machine that needs 6 clock cycles for the LOAD instructions}\newline
-    Assuming all operations are performed around the same amount:
-    \newline
-    $ LOAD\ with\ 4\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 15\ cycles. $\newline
-    $ LOAD\ with\ 6\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 17\ cycles. $\newline
-    $ cycles_{old} = \frac{15}{15}=100\%, cycles_{new} = \frac{17}{15}=113.3\%$ \newline
-    that means on average you need 13.3\% more time to complete a programme.
-
-    \item{How much faster is a CPU when its STORE works twice as fast?}\newline
-    Assuming all operations are performed around the same amount:
-    \newline
-    $ STORE\ with\ 12\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 15\ cycles. $\newline
-    $ STORE\ with\ 6\ cycles \rightarrow execution\ of\ all\ operations\ takes\ 12\ cycles. $\newline
-    $ cycles_{old} = \frac{15}{15}=100\%, cycles_{new} = \frac{12}{15}=80\%$ \newline
-    that means on average you need 20\% less time to complete a programme.
+    \item Control hazards: Caused by delay between the fetching of instructions and decisions about 
+    changes in control flow (branches and jumps)
+    \item Data hazards: Instruction depends on result of prior instruction still in the pipeline.
+    \item Structural hazards: Hardware cannot support certain combinations of instructions 
+    (two instructions in the pipeline require the same resource).
 \end{itemize}
-
-\section{Using a stack in subroutines}
-There are several reasons why one needs the stack for assembler subroutines. 
-One reason is that it allows for nested subroutines. Another reason is that 
-it allows for passing parameters to subroutines. The processor stack is used 
-to store the return address of the subroutine.
-
-\section{ALU & SLT}
-\begin{itemize}
-    \item The slt command in the ALU (Arithmetic Logic Unit) stands for “Set Less Than”. 
-    It is a command that compares two values and sets a register to 1 if the first value 
-    is less than the second value, and 0 otherwise.
-    \item The ALU calculates that using second
-    value minus first value and if the result is $< 0$, the msb (most significant bit) will
-    be 1 and the first value must be smaller than the second value. This will then be fed back 
-    to the ALU and will be the output.
-\end{itemize}
-
+\section{Stall \_/2 Points}
+Explain why on slide 19 it is enough to wait two clock cycles but not on slide 23 (the slide numbers
+refer to the chapter “005d-Der-Prozessor - Pipeline.pdf”).\newline
+The register in slide 19 can be overwritten and read in the same cycle. Therefore, in contrast 
+to slide 23, one cycle can be saved because it cannot be read in the same cycle.
+\rightarrow Slide 23 has an extra stall compared to slide 19
+\section{Data Hazard \_/2 Points}
+Show all data hazards in the following code. Which dependencies are data hazards that can be
+resolved by forwarding? Which dependencies are data hazards that will lead to a stall ?
+\begin{verbatim}
+1 add $t0, $t5, $t4
+2 lw $s2, 0($t0)
+3 sub $s3, $t0 ,$s2
+4 sw $t4, 4($s3)
+\end{verbatim}
+There are 3 RAW hazards, marked by $_{number}$:\newline
+1 add \$t0$_1$, \$t5, \$t4 \newline
+2 lw \$s2$_2$, 0(\$t0$_1$) \newline
+3 sub \$s3$_3$, \$t0 ,\$s2$_2$ \newline
+4 lw \$t4, 4(\$s3$_3$) \newline
+Can be solved by: \newline
+1: forwarding is enough\newline
+2: stall is needed\newline
+3: forwarding is enough\newline
 \end{document}

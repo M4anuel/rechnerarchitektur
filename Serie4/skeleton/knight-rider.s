@@ -432,7 +432,7 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
-//up button
+	//up button
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
@@ -490,7 +490,7 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
-//up button
+	//up button
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
