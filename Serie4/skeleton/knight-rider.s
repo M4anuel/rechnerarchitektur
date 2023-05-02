@@ -147,7 +147,7 @@ knightRiderLoop:
 	//ran into some trouble, tried fixing it for 3h and then wrote this in 20min. It works but ugly af
 	//instead of #0b00... we could've of course used some register to store the value in and instead of MOV
 	//used LSL and LSR where needed, but if we code it like that, there's really no point in doing it the 
-	//proper way other than to show you that we can do it, so I did it with the first example (line 168)
+	//proper way other than to show you that we can do it, so I did it with the first example (line 168 & 371)
 	//up button
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
@@ -368,7 +368,7 @@ knightRiderLoop:
 	BL waitForButton
 	CMP R0, #1
 	BEQ decrease_speed
-	MOV R4,#0b01000000
+	LSR R4, R4, #1
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
