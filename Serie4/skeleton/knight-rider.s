@@ -3,6 +3,7 @@
  Series 4 - Raspberry Pi Programming Part 1 - Running Light
  
  Group members:
+ --Our code is really dumb, 
  Manuel Flückiger; Deepak Parapuckal; Nicolas Willimann
  
  Individualised code by:
@@ -523,15 +524,15 @@ knightRiderLoop:
 	B knightRiderLoop
 
 	increase_speed:
-		sub R5, R5, #100
-		B knightRiderLoop
-
-	decrease_speed:
 		CMP R5, #100
 		BGT increase
 		B knightRiderLoop
-	increase:
+
+	decrease_speed:
 		add R5, R5, #100
+		B knightRiderLoop
+	increase:
+		sub R5, R5, #100
 		B knightRiderLoop
 exit:
 	MOV 	R7, #1				// System call 1, exit
