@@ -154,16 +154,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	//repeat 14 times...
 	second_step:
 		LSL R4, R4, #1
@@ -185,16 +189,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	third_step:
 		MOV R4,#0b00000100
 		LDR R0, .LATCH_PIN
@@ -215,16 +223,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 
 	fourth_step:
 		MOV R4,#0b00001000
@@ -246,16 +258,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	fifth_step:
 		MOV R4,#0b00010000
 		LDR R0, .LATCH_PIN
@@ -276,16 +292,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	sixth_step:
 		MOV R4,#0b00100000
 		LDR R0, .LATCH_PIN
@@ -306,16 +326,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	seventh_step:
 		MOV R4,#0b01000000
 		LDR R0, .LATCH_PIN
@@ -336,16 +360,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	eight_step:
 		MOV R4,#0b10000000
 		LDR R0, .LATCH_PIN
@@ -366,16 +394,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	ninth_step:
 		LSR R4, R4, #1
 		LDR R0, .LATCH_PIN
@@ -396,16 +428,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	tenth_step:
 		MOV R4,#0b00100000
 		LDR R0, .LATCH_PIN
@@ -426,16 +462,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	eleventh_step:
 		MOV R4,#0b00010000
 		LDR R0, .LATCH_PIN
@@ -456,16 +496,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	twelvth_step:
 		MOV R4,#0b00001000
 		LDR R0, .LATCH_PIN
@@ -486,16 +530,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	thirteenth_step:
 		MOV R4,#0b00000100
 		LDR R0, .LATCH_PIN
@@ -516,16 +564,20 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 	fourteenth_step:
 		MOV R4,#0b00000010
 		LDR R0, .LATCH_PIN
@@ -546,30 +598,35 @@ knightRiderLoop:
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ increase_speed
+		MOV R5, R0
 
 		//down button
 		LDR R0, .BUTTON2_PIN
 		MOV R1, R5
 		LDR R2, .PUD_DOWN
 		BL waitForButton
+		MOV R1, R5
 		CMP R0, #1
 		BEQ decrease_speed
+		MOV R5, R0
 
 	B knightRiderLoop
 
 	increase_speed:
-		CMP R5, #100
+		CMP R1, #100
 		BGT increase
+		MOV R0, R1
 		BX LR
 		
 
 	decrease_speed:
-		add R5, R5, #100
+		add R0, R1, #100
 		BX LR
 	increase:
-		sub R5, R5, #100
+		sub R0, R1, #100
 		BX LR
 exit:
 	MOV 	R7, #1				// System call 1, exit
