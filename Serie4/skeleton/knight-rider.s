@@ -3,7 +3,8 @@
  Series 4 - Raspberry Pi Programming Part 1 - Running Light
  
  Group members:
- --Our code is really dumb, 
+ --Our code is really dumb, we got it working with LSL and LSR, but ran into some bugs lateron, so we decided
+ to do it the dumb way. The programme still works :) Think outside the box, or like a box
  Manuel Flückiger; Deepak Parapuckal; Nicolas Willimann
  
  Individualised code by:
@@ -142,7 +143,12 @@ knightRiderLoop:
 
 	/* Other logic goes here, like updating variables, branching to the loop label, etc. */
 	/* to be implemented by student */
-//up button
+	//as stated on line 6 & 7, this part is coded really dumb (hardcoded). We did do it with LSL and LSR at first
+	//ran into some trouble, tried fixing it for 3h and then wrote this in 20min. It works but ugly af
+	//instead of #0b00... we could've of course used some register to store the value in and instead of MOV
+	//used LSL and LSR where needed, but if we code it like that, there's really no point in doing it the 
+	//proper way other than to show you that we can do it, so I did it with the first example (line 168)
+	//up button
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
@@ -158,7 +164,8 @@ knightRiderLoop:
 	CMP R0, #1
 	BEQ decrease_speed
 	//repeat 14
-	MOV R4,#0b00000010
+	
+	LSL R4, R4, #1
 	LDR R0, .LATCH_PIN
 	LDR R1, .LOW
 	BL digitalWrite
