@@ -153,23 +153,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	//repeat 14 times...
 	second_step:
 		LSL R4, R4, #1
@@ -190,24 +190,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
-	third_step:
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 		MOV R4,#0b00000100
 		LDR R0, .LATCH_PIN
 		LDR R1, .LOW
@@ -226,24 +225,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
-
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	fourth_step:
 		MOV R4,#0b00001000
 		LDR R0, .LATCH_PIN
@@ -263,23 +261,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	fifth_step:
 		MOV R4,#0b00010000
 		LDR R0, .LATCH_PIN
@@ -299,23 +297,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	sixth_step:
 		MOV R4,#0b00100000
 		LDR R0, .LATCH_PIN
@@ -335,23 +333,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	seventh_step:
 		MOV R4,#0b01000000
 		LDR R0, .LATCH_PIN
@@ -371,23 +369,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	eight_step:
 		MOV R4,#0b10000000
 		LDR R0, .LATCH_PIN
@@ -407,23 +405,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	ninth_step:
 		LSR R4, R4, #1
 		LDR R0, .LATCH_PIN
@@ -443,23 +441,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	tenth_step:
 		MOV R4,#0b00100000
 		LDR R0, .LATCH_PIN
@@ -479,23 +477,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	eleventh_step:
 		MOV R4,#0b00010000
 		LDR R0, .LATCH_PIN
@@ -515,23 +513,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	twelvth_step:
 		MOV R4,#0b00001000
 		LDR R0, .LATCH_PIN
@@ -551,23 +549,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	thirteenth_step:
 		MOV R4,#0b00000100
 		LDR R0, .LATCH_PIN
@@ -587,23 +585,23 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 	fourteenth_step:
 		MOV R4,#0b00000010
 		LDR R0, .LATCH_PIN
@@ -623,39 +621,39 @@ knightRiderLoop:
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL increase_speed ; Branch to subroutine and save return address in LR
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL increase_speed
+	MOV R4, R0
 
 	//down button
 	LDR R0, .BUTTON2_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
-	PUSH {LR} ; Save LR on the stack
-	BL waitForButton ; Call subroutine
-	POP {LR} ; Restore LR from the stack
-	MOV R0, R5 ; Pass R5 as an argument
-	BL decrease_speed ; Branch to subroutine and save return address in LR 
-	MOV R4, R0 ; Store returned value in R4
+	PUSH {LR}
+	BL waitForButton
+	POP {LR}
+	MOV R0, R5
+	BL decrease_speed 
+	MOV R4, R0
 
 	B knightRiderLoop
 
 	increase_speed:
-	CMP R0, #100 ; Compare argument 
-	BGT increase ; Branch if greater than 100 
-	MOV R0, #100 ; Set return value to 100 
-	BX LR ; Return from subroutine 
+	CMP R0, #100 
+	BGT increase 
+	MOV R0, #100 
+	BX LR 
 
 decrease_speed:
-	ADD R0, R0, #100 ; Add 100 to argument 
-	BX LR ; Return from subroutine 
+	ADD R0, R0, #100  
+	BX LR 
 
 increase:
-	SUB R0, R0, #100 ; Subtract 100 from argument 
-	BX LR ; Return from subroutine 
+	SUB R0, R0, #100 
+	BX LR 
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
