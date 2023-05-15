@@ -161,8 +161,6 @@ knightRider:
 	B 	knightRiderRestart
 
 	endgame:
-		
-		B endAnimation
 		LDR R0, = finalString
     	MOV R1, R10
 		BL printf		// again, c printf to debug
@@ -243,54 +241,6 @@ waitForButton:
 	MOV	R1, R9
 	LDMIA SP!, {R2-R10, PC}
 
-
-endAnimation:
-	STMDB SP!, {R2-R10, LR}
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, #0b1111111111
-	BL shiftOut 
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite 
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, #0b000000000
-	BL shiftOut 
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite 
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, #0b1111111111
-	BL shiftOut 
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite 
-	LDR R0, .LATCH_PIN 
-	LDR R1, .HIGH
-	BL digitalWrite 
-	LDR R0, .LATCH_PIN
-	LDR R1, .LOW
-	BL digitalWrite
-	LDR R0, .DATA_PIN
-	LDR R1, .CLOCK_PIN
-	LDR R2, .MSBFIRST
-	MOV R3, #0b000000000
-	BL shiftOut
-	LDMIA SP!, {R2-R10, PC}
 // Define constants for high- and low signals on the pins
 .HIGH:			.word	1
 .LOW:			.word	0
