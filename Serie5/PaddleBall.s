@@ -4,6 +4,8 @@
 
  Author: Manuel Flückiger
 
+ Version: standard version
+
 -----------------------------------------------------------
 */
 
