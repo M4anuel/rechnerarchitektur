@@ -111,11 +111,7 @@ knightRider:
 	LDR	R0, .BUTTON1_PIN
 	MOV	R1, R7
 	MOV	R2, R8
-	BL	waitForButton
-	LDR R0, .BUZZER_PIN
-    LDR R1, .LOW
-    BL digitalWrite
-	
+	BL	waitForButton	
 	CMP	R0, #1
 	BEQ buttonPressed
 	BNE continue
@@ -223,6 +219,9 @@ waitForButton:
 		B	returnButtonPress
 
 	returnButtonPress:
+	LDR R0, .BUZZER_PIN
+    LDR R1, .LOW
+    BL digitalWrite
 	MOV	R0, R10				// return 1 if button pressed within time window
 	MOV	R1, R9
 	LDMIA SP!, {R2-R10, PC}
