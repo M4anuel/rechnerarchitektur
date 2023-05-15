@@ -70,6 +70,9 @@ knightRiderRestart:
 
 
 knightRider:
+	LDR R0, .BUZZER_PIN
+    LDR R1, .LOW
+    BL digitalWrite
 	
 	// Latch pin low (read serial data)
 	LDR	R0, .LATCH_PIN
@@ -120,7 +123,13 @@ knightRider:
 
 		CMP R5, #0b10000000
 		BEQ scorePoint
-		BNE continue
+		BNE scream
+
+	scream:
+		LDR R0, .BUZZER_PIN
+   		LDR R1, .HIGH
+    	BL digitalWrite
+		B continue
 
 	scorePoint:
 		ADD R10, R10, #1
@@ -243,4 +252,5 @@ waitForButton:
 
 .BUZZER_PIN			.word	21
 
+.data
 string: .asciz "The score is: %d\n"
