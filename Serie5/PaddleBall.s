@@ -163,8 +163,11 @@ knightRider:
 
 	endgame:
 		LDR R0, = finalString
-		SUB	R10, #0b11111111, R10
-    	MOV R1, R10
+		/* inverted scoreboard
+		SUB R10, R10, #0b11111111
+		MVN R10, R10
+		ADD R10, #1
+		 */
 		BL printf		// again, c printf to debug
 		LDR R0, .LATCH_PIN
 		LDR R1, .LOW
