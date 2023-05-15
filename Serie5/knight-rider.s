@@ -54,14 +54,11 @@ configurePins:
 	
 lobby:
 		LDR	R0, .BUTTON2_PIN
-		MOV	R1, R7
-		MOV	R2, R9
+		MOV	R1, #500
+		MOV	R2, #1
 		BL	waitForButton
 		CMP	R0, #1
 		BEQ start
-
-		MOV	R0, #500
-		BL 	delay
 		B lobby
 
 start:
