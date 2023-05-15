@@ -146,9 +146,7 @@ knightRider:
 
 	MOV	R8, R1		// update button state (returned from subroutine)
 
-	LDR R0, =string
-    MOV R1, R10
-	BL printf		// c printf function, debugging help
+
 
 	SUBS	R4, R4, #1
 	BNE	knightRider
@@ -158,10 +156,14 @@ knightRider:
 	CMP R7, #200
 	BEQ endgame		// if the delay has reached 200ms, the game should be over, else 50ms is subtracted from the delay, to make it faster
 	SUB R7, R7, #50
+	LDR R0, =string
+    MOV R1, R10
+	BL printf		// c printf function, debugging help
 	B 	knightRiderRestart
 
 	endgame:
 		LDR R0, = finalString
+		SUB	R10, #0b11111111, R10
     	MOV R1, R10
 		BL printf		// again, c printf to debug
 		LDR R0, .LATCH_PIN
