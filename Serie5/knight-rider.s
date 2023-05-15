@@ -114,7 +114,14 @@ knightRider:
 	BL	waitForButton	
 	CMP	R0, #1
 	BEQ buttonPressed
-	BNE continue
+
+	CMP R5, #0b00000001
+	BEQ scream
+	CMP R5, #0b10000000
+	BEQ scream
+
+	B continue
+
 	buttonPressed:
 		CMP R5, #0b00000001
 		BEQ scorePoint
@@ -145,7 +152,16 @@ knightRider:
 	
 	// Change direction (flip bit with XOR operation)
 	EOR	R6, R6, #1
+	CMP R7, #200
+	BEQ endgame
+	SUB R7, R7, #100
 	B 	knightRiderRestart
+
+	endgame:
+		LDR R0, = finalString
+    	MOV R1, R10
+		BL printf
+		B exit
 
 
 exit:
@@ -255,3 +271,4 @@ waitForButton:
 
 .data
 string: .asciz "The score is: %d\n"
+finalString: .asciz "The finsal score is: %d\n"
