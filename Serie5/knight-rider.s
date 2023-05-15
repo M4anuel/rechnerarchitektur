@@ -70,9 +70,6 @@ knightRiderRestart:
 
 
 knightRider:
-	LDR R0, .BUZZER_PIN
-    LDR R1, .LOW
-    BL digitalWrite
 	
 	// Latch pin low (read serial data)
 	LDR	R0, .LATCH_PIN
@@ -106,6 +103,7 @@ knightRider:
 	LDR	R1, .HIGH
 	BL	digitalWrite
 
+	//delay for how much time you have to press the button
 	MOV	R0, #250
 	BL 	delay
 	
@@ -114,6 +112,10 @@ knightRider:
 	MOV	R1, R7
 	MOV	R2, R8
 	BL	waitForButton
+	LDR R0, .BUZZER_PIN
+    LDR R1, .LOW
+    BL digitalWrite
+	
 	CMP	R0, #1
 	BEQ buttonPressed
 	BNE continue
@@ -250,7 +252,7 @@ waitForButton:
 .BUTTON1_PIN:		.word	18
 .BUTTON2_PIN:		.word	25
 
-.BUZZER_PIN			.word	21
+.BUZZER_PIN:		.word	24
 
 .data
 string: .asciz "The score is: %d\n"
