@@ -1,17 +1,15 @@
 /*
 -----------------------------------------------------------
- Series 4 - Raspberry Pi Programming Part 1 - Running Light
- 
- ** SOLUTION **
+ Series 5 - Raspberry Pi Programming Part 1 - Paddle Ball
 
- Author: Adrian Wälchli
+ Author: Manuel Flückiger
 
 -----------------------------------------------------------
 */
 
 .global main
 .func main
-.extern printf
+.extern printf //for debugging 
 
 main:
 	// This will setup the wiringPi library.
@@ -51,15 +49,20 @@ configurePins:
 	LDR	R0, .BUTTON2_PIN
 	LDR	R1, .PUD_UP
 	BL	pullUpDnControl
+
+	// Buzzer
+	LDR	R0, .BUZZER_PIN
+	LDR	R1, .OUTPUT
+	BL	pinMode
 	
 lobby:
 		LDR	R0, .BUTTON2_PIN
-		MOV	R1, #500
-		MOV	R2, #1
+		MOV	R1, #500			//Every every 0.5 seconds we refresh to see if the game should be restarted
+		MOV	R2, #1				//default value
 		BL	waitForButton
 		CMP	R0, #1
-		BEQ start
-		B lobby
+		BEQ start				//once we pressed the button, we want to start
+		B lobby					//infinite loop until you either start the game or exit with CTRL + c
 
 start:
 	MOV	R5, #0b00000001		// The position of the light is encoded as a one-hot binary pattern and
@@ -109,33 +112,26 @@ knightRider:
 	LDR	R0, .LATCH_PIN
 	LDR	R1, .HIGH
 	BL	digitalWrite
-
-	//delay for how much time you have to press the button
-	MOV	R0, #250
-	BL 	delay
-	
 	
 	LDR	R0, .BUTTON1_PIN
 	MOV	R1, R7
 	MOV	R2, R8
 	BL	waitForButton	
 	CMP	R0, #1
-	BEQ buttonPressed
-
+	BEQ buttonPressed		// if the button isn't pressed, check, if it should've been
 	CMP R5, #0b00000001
-	BEQ scream
+	BEQ scream				// if it should've been, scream & shout ;)
 	CMP R5, #0b10000000
 	BEQ scream
-
-	B continue
+	B continue				// else continue
 
 	buttonPressed:
-		CMP R5, #0b00000001
+		CMP R5, #0b00000001 // check if the button has been pressed at the correct time
 		BEQ scorePoint
 
 		CMP R5, #0b10000000
 		BEQ scorePoint
-		BNE scream
+		BNE scream			// else scream
 
 	scream:
 		LDR R0, .BUZZER_PIN
@@ -152,7 +148,7 @@ knightRider:
 
 	LDR R0, =string
     MOV R1, R10
-	BL printf
+	BL printf		// c printf function, debugging help
 
 	SUBS	R4, R4, #1
 	BNE	knightRider
@@ -160,15 +156,16 @@ knightRider:
 	// Change direction (flip bit with XOR operation)
 	EOR	R6, R6, #1
 	CMP R7, #200
-	BEQ endgame
+	BEQ endgame		// if the delay has reached 200ms, the game should be over, else 50ms is subtracted from the delay, to make it faster
 	SUB R7, R7, #50
 	B 	knightRiderRestart
 
 	endgame:
+		
+		B endAnimation
 		LDR R0, = finalString
     	MOV R1, R10
-		BL printf
-		B lobby
+		BL printf		// again, c printf to debug
 		LDR R0, .LATCH_PIN
 		LDR R1, .LOW
 		BL digitalWrite
@@ -176,31 +173,16 @@ knightRider:
 		LDR R1, .CLOCK_PIN
 		LDR R2, .MSBFIRST
 		MOV R3, R10
-		BL shiftOut
+		BL shiftOut 	// since the 54-AFHJ.... converts decimal to binary for us, we can just parse our score as int and it will be displayed correctly
 		LDR R0, .LATCH_PIN 
 		LDR R1, .HIGH
-		BL digitalWrite
-
+		BL digitalWrite 
+		B lobby 		// after the game, return to the lobby
 
 
 exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
-
-/* ehemaliger button 2 press
-LDR	R0, .BUTTON2_PIN
-	MOV	R1, R7
-	MOV	R2, R9
-	BL	waitForButton
-	CMP	R0, #1
-	ADDEQ	R7, R7, #10
-	MOV	R9, R1		// update button state (returned from subroutine)
-
-	// Check if the speed is at max. value (delay = min. value)
-	CMP	R7, #0
-	MOVMI	R7, #200
-
- */
 
 /*
 -------------------------------------------------------------------------
@@ -262,8 +244,53 @@ waitForButton:
 	LDMIA SP!, {R2-R10, PC}
 
 
-
-
+endAnimation:
+	STMDB SP!, {R2-R10, LR}
+	LDR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, #0b1111111111
+	BL shiftOut 
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite 
+	LDR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, #0b000000000
+	BL shiftOut 
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite 
+	LDR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, #0b1111111111
+	BL shiftOut 
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite 
+	LDR R0, .LATCH_PIN 
+	LDR R1, .HIGH
+	BL digitalWrite 
+	LDR R0, .LATCH_PIN
+	LDR R1, .LOW
+	BL digitalWrite
+	LDR R0, .DATA_PIN
+	LDR R1, .CLOCK_PIN
+	LDR R2, .MSBFIRST
+	MOV R3, #0b000000000
+	BL shiftOut
+	LDMIA SP!, {R2-R10, PC}
 // Define constants for high- and low signals on the pins
 .HIGH:			.word	1
 .LOW:			.word	0
