@@ -21,132 +21,29 @@ main:
 
 
 configurePins:
-	LDR	R0, .DATA_PIN
-	LDR	R1, .OUTPUT
-	BL	pinMode
-
-	LDR	R0, .LATCH_PIN
-	LDR	R1, .OUTPUT
-	BL	pinMode
-
-	LDR	R0, .CLOCK_PIN
-	LDR	R1, .OUTPUT
-	BL	pinMode
-
-	// Button 1
-	LDR	R0, .BUTTON1_PIN
-	LDR	R1, .INPUT
-	BL	pinMode
-
-	LDR	R0, .BUTTON1_PIN
-	LDR	R1, .PUD_UP
-	BL	pullUpDnControl
-
-	// Button 2
-	LDR	R0, .BUTTON2_PIN
-	LDR	R1, .INPUT
-	BL	pinMode
-
-	LDR	R0, .BUTTON2_PIN
-	LDR	R1, .PUD_UP
-	BL	pullUpDnControl
-
     LDR R0, .BUZZER_PIN
     LDR R1, .OUTPUT
     BL pinMode
 
 
 start:
-	MOV	R5, #0b00000001		// The position of the light is encoded as a one-hot binary pattern and
-						    // the active bit will be moved using a left- and right-shift
-	MOV 	R6, #0			// Binary value determining the direction (0: left-shift, 1: right-shift)
-	MOV	R7, #200			// The time (in milliseconds) the running light is frozen
-
-	MOV	R8, #1				// Previous state of BUTTON1 (default is off)
-	MOV	R9, #1				// Previous state of BUTTON2 (default is off)
-
-knightRiderRestart:
-	MOV	R4, #7				// A counter variable (counting down from 7 to 0)
-
-
-knightRider:
 
     LDR R0, .BUZZER_PIN
     LDR R1, .HIGH
     BL digitalWrite
-	
-	// Latch pin low (read serial data)
-	LDR	R0, .LATCH_PIN
-	LDR	R1, .LOW
-	BL	digitalWrite
-	
-	CMP	R6, #1
-	BNE	move_left
-	B	move_right
-	
-	// Shift light to the left by one bit
-	move_left:
-	MOV	R5, R5, LSL #1
-	B	send_data
-	
-	// Shift light to the right by one bit
-	move_right:
-	MOV	R5, R5, LSR #1
-	B 	send_data
-	
-	// Send serial data
-	send_data:
 
+    ldr r0, =#2000000
+    bl   timer_wait  // 2second delay
+
+    
     LDR R0, .BUZZER_PIN
     LDR R1, .LOW
     BL digitalWrite
 
+    ldr r0, =#2000000
+    bl   timer_wait  // 2second delay
 
-
-	LDR R0, .DATA_PIN
-	LDR	R1, .CLOCK_PIN
-	LDR	R2, .LSBFIRST
-	MOV	R3, R5 
-	BL	shiftOut
-
-	// Latch pin high (write serial data to parallel output)
-	LDR	R0, .LATCH_PIN
-	LDR	R1, .HIGH
-	BL	digitalWrite
-
-	/*
-	MOV	R0, #25
-	BL 	delay
-	*/
-	
-	LDR	R0, .BUTTON1_PIN
-	MOV	R1, R7
-	MOV	R2, R8
-	BL	waitForButton
-	CMP	R0, #1
-	SUBEQ	R7, R7, #10
-	MOV	R8, R1		// update button state (returned from subroutine)
-
-	LDR	R0, .BUTTON2_PIN
-	MOV	R1, R7
-	MOV	R2, R9
-	BL	waitForButton
-	CMP	R0, #1
-	ADDEQ	R7, R7, #10
-	MOV	R9, R1		// update button state (returned from subroutine)
-
-	// Check if the speed is at max. value (delay = min. value)
-	CMP	R7, #0
-	MOVMI	R7, #200
-	
-
-	SUBS	R4, R4, #1
-	BNE	knightRider
-	
-	// Change direction (flip bit with XOR operation)
-	EOR	R6, R6, #1
-	B 	knightRiderRestart
-
+    B start
 
 exit:
 	MOV 	R7, #1				// System call 1, exit
@@ -158,6 +55,47 @@ exit:
  SUBROUTINES
 -------------------------------------------------------------------------
 */ 
+
+;@ Entry: R0 = microseconds to wait ....  2 seconds = 2000000 usecs
+;@ Change Pi_Base_Addr = 0x2000000 for Pi1 and PiZero, 0x3F000000 for Pi2/3
+;@ set at Pi2/3 for demo
+;@ to undesrtand what it does look at .... BCM2835 Manual Section 12
+.globl timer_wait;
+timer_wait:
+        push    {r4, r5, lr}
+        ldr     r2, .Pi_Base_Addr
+.read_timer_loop1:
+        ldr     r3, [r2]
+        add     r3, r3, #12288
+        ldr     ip, [r3, #8]
+        ldr     r3, [r2]
+        add     r3, r3, #12288
+        ldr     lr, [r3, #4]
+        ldr     r3, [r2]
+        add     r3, r3, #12288
+        ldr     r3, [r3, #8]
+        cmp     ip, r3
+        bne     .read_timer_loop1
+        mov     r4, lr
+        mov     r5, ip
+.read_timer_loop2:
+        ldr     r3, [r2]
+        add     r3, r3, #12288
+        ldr     ip, [r3, #8]
+        ldr     r3, [r2]
+        add     r3, r3, #12288
+        ldr     lr, [r3, #4]
+        ldr     r3, [r2]
+        add     r3, r3, #12288
+        ldr     r3, [r3, #8]
+        cmp     ip, r3
+        bne     .read_timer_loop2
+        cmp     r5, ip
+        cmpeq   r4, lr
+        bhi     .read_timer_loop2
+        pop     {r4, r5, pc}
+.Pi_Base_Addr :
+        .word   0x3F000000
 
 waitForButton:
 	/* 
