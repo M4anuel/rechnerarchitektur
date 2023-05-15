@@ -52,7 +52,17 @@ configurePins:
 	LDR	R1, .PUD_UP
 	BL	pullUpDnControl
 	
+lobby:
+		LDR	R0, .BUTTON2_PIN
+		MOV	R1, R7
+		MOV	R2, R9
+		BL	waitForButton
+		CMP	R0, #1
+		BEQ start
 
+		MOV	R0, #500
+		BL 	delay
+		B lobby
 
 start:
 	MOV	R5, #0b00000001		// The position of the light is encoded as a one-hot binary pattern and
@@ -154,14 +164,26 @@ knightRider:
 	EOR	R6, R6, #1
 	CMP R7, #200
 	BEQ endgame
-	SUB R7, R7, #100
+	SUB R7, R7, #50
 	B 	knightRiderRestart
 
 	endgame:
 		LDR R0, = finalString
     	MOV R1, R10
 		BL printf
-		B exit
+		B lobby
+		LDR R0, .LATCH_PIN
+		LDR R1, .LOW
+		BL digitalWrite
+		LDR R0, .DATA_PIN
+		LDR R1, .CLOCK_PIN
+		LDR R2, .MSBFIRST
+		MOV R3, R10
+		BL shiftOut
+		LDR R0, .LATCH_PIN 
+		LDR R1, .HIGH
+		BL digitalWrite
+
 
 
 exit:
@@ -271,4 +293,4 @@ waitForButton:
 
 .data
 string: .asciz "The score is: %d\n"
-finalString: .asciz "The finsal score is: %d\n"
+finalString: .asciz "The final score is: %d\n"
