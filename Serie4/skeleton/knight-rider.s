@@ -95,7 +95,7 @@ knightRiderLoop:
 	2. Send the data with shiftOut
 	3. Set the latch pin to high
 	*/
-	MOV R4,#0b00000001
+	MOV R4,#0b00000001 
 	// Set latch pin low (read serial data)
 	/* to be implemented by student */
 	LDR R0, .LATCH_PIN
@@ -353,7 +353,7 @@ knightRiderLoop:
 	BL digitalWrite
 	MOV	R0, R5
 	BL 	delay
-//up button
+	//up button
 	LDR R0, .BUTTON1_PIN
 	MOV R1, R5
 	LDR R2, .PUD_DOWN
