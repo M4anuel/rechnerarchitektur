@@ -11,6 +11,7 @@
 
 .global main
 .func main
+.extern printf
 
 main:
 	// This will setup the wiringPi library.
@@ -56,11 +57,13 @@ configurePins:
 start:
 	MOV	R5, #0b00000001		// The position of the light is encoded as a one-hot binary pattern and
 						    // the active bit will be moved using a left- and right-shift
-	MOV 	R6, #0			// Binary value determining the direction (0: left-shift, 1: right-shift)
-	MOV	R7, #200			// The time (in milliseconds) the running light is frozen
+	MOV R6, #0				// Binary value determining the direction (0: left-shift, 1: right-shift)
+	MOV	R7, #500			// The time (in milliseconds) the running light is frozen
 
 	MOV	R8, #1				// Previous state of BUTTON1 (default is off)
 	MOV	R9, #1				// Previous state of BUTTON2 (default is off)
+
+	MOV R10, #0				// keeps track of the score
 
 knightRiderRestart:
 	MOV	R4, #7				// A counter variable (counting down from 7 to 0)
@@ -100,31 +103,35 @@ knightRider:
 	LDR	R1, .HIGH
 	BL	digitalWrite
 
-	/*
-	MOV	R0, #25
+	MOV	R0, #250
 	BL 	delay
-	*/
+	
 	
 	LDR	R0, .BUTTON1_PIN
 	MOV	R1, R7
 	MOV	R2, R8
 	BL	waitForButton
 	CMP	R0, #1
-	SUBEQ	R7, R7, #10
+	BEQ buttonPressed
+	BNE continue
+	buttonPressed:
+		CMP R5, #0b00000001
+		BEQ scorePoint
+
+		CMP R5, #0b10000000
+		BEQ scorePoint
+		BNE continue
+
+	scorePoint:
+		ADD R10, R10, #1
+
+	continue:
+
 	MOV	R8, R1		// update button state (returned from subroutine)
 
-	LDR	R0, .BUTTON2_PIN
-	MOV	R1, R7
-	MOV	R2, R9
-	BL	waitForButton
-	CMP	R0, #1
-	ADDEQ	R7, R7, #10
-	MOV	R9, R1		// update button state (returned from subroutine)
-
-	// Check if the speed is at max. value (delay = min. value)
-	CMP	R7, #0
-	MOVMI	R7, #200
-	
+	LDR R0, =string
+    MOV R1, R10
+	BL printf
 
 	SUBS	R4, R4, #1
 	BNE	knightRider
@@ -138,6 +145,20 @@ exit:
 	MOV 	R7, #1				// System call 1, exit
 	SWI 	0				// Perform system call
 
+/* ehemaliger button 2 press
+LDR	R0, .BUTTON2_PIN
+	MOV	R1, R7
+	MOV	R2, R9
+	BL	waitForButton
+	CMP	R0, #1
+	ADDEQ	R7, R7, #10
+	MOV	R9, R1		// update button state (returned from subroutine)
+
+	// Check if the speed is at max. value (delay = min. value)
+	CMP	R7, #0
+	MOVMI	R7, #200
+
+ */
 
 /*
 -------------------------------------------------------------------------
@@ -220,3 +241,6 @@ waitForButton:
 .BUTTON1_PIN:		.word	18
 .BUTTON2_PIN:		.word	25
 
+.BUZZER_PIN			.word	21
+
+string: .asciz "The score is: %d\n"
